@@ -1,0 +1,40 @@
+<div class="position-relative">
+    <div class="position-absolute top-50 start-50 translate-middle display: flex;">
+        <H3>Filtre by genre</H3>
+        <mat-form-field class="example-full-width mat-dialog-actions" appearance="fill">
+            <mat-label>Genre</mat-label>
+            <mat-select [formControl]="genres" multiple (openedChange)="comboChange($event)">
+                <mat-select-trigger>
+                    {{ genres.value ? genres.value[0] : "" }}
+                    <span *ngIf="genres.value?.length > 1" class="example-additional-selection">
+            (+{{ genres.value.length - 1 }}
+            {{ genres.value?.length === 2 ? "other" : "others" }})
+          </span>
+                </mat-select-trigger>
+                <mat-option name="genre" *ngFor="let genre of genreList" [value]="genre">{{ genre }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+
+<div class="panel panel-primary">
+    <table id="example" class="table table-striped table-bordered table-sm row-border hover" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>ReleaseDate</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let movie of movies">
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.summary }}</td>
+                <td>{{ movie.releaseDate | date: "mediumDate" }}</td>
+                <td>{{ movie.genreString }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
